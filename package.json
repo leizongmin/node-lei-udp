@@ -1,0 +1,26 @@
+{
+  "name": "lei-udp",
+  "version": "1.0.0",
+  "description": "reliable UDP data transfer",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -t 30000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leizongmin/node-lei-udp.git"
+  },
+  "keywords": [
+    "udp",
+    "rudp"
+  ],
+  "author": "Zongmin Lei <leizongmin@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leizongmin/node-lei-udp/issues"
+  },
+  "homepage": "https://github.com/leizongmin/node-lei-udp#readme",
+  "dependencies": {
+    "debug": "^2.2.0"
+  }
+}
