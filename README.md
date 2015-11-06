@@ -31,14 +31,16 @@ socket.ping(host, port, function (err, spent, timestamp) {
   else console.log('网络延时: %sms', spent);
 });
 
-// 发送一般数据
-socket.send(host, port, data, function (err) {
+// 发送数据（不检查是否发送成功）
+socket.send(host, port, data, function (err, bytes) {
   if (err) console.error(err);
+  console.log('发送了%s字节', bytes);
 });
 
-// 发送需确认的数据
-socket.sendR(host, port, data, function (err) {
+// 发送数据（可靠传输，确认数据是否发送成功）
+socket.sendR(host, port, data, function (err, bytes, spent, retry) {
   if (err) console.error(err);
+  console.log('发送了%s字节，耗时%sms，重试次数：%s', bytes, spent, retry);
 });
 
 // 关闭socket
