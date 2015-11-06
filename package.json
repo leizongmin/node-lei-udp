@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/leizongmin/node-lei-udp#readme",
   "dependencies": {
-    "debug": "^2.2.0"
+    "debug": "^2.2.0",
+    "lei-proto": "0.0.3"
   }
 }
