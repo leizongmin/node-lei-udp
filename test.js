@@ -3,7 +3,10 @@ process.env.DEBUG = 'lei-udp:*';
 var UDP = require('./');
 console.log(UDP);
 
-var udp = UDP.create();
+var udp = UDP.create({
+  responseTimeout: 1000,
+  cacheTimeout: 5000
+});
 console.log(udp);
 
 function takeChar (n, c) {
@@ -24,7 +27,11 @@ udp.bind('127.0.0.1', 5555, function (err) {
     udp.exit(function () {
       console.log('exited');
     })
-  }, 1000);
+  }, 6000);
+
+  udp.on('exit', function () {
+    console.log(udp._remoteNamespace);
+  });
 
   udp.on('data', function (addr, data) {
     console.log('on data', addr, data.length, data.toString());
