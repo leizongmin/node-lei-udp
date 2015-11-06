@@ -30,8 +30,15 @@ udp.bind('127.0.0.1', 5555, function (err) {
     console.log('on data', addr, data.length, data.toString());
   });
 
-  udp.send('127.0.0.1', 5555, takeChar(100, 'a'), console.log);
-  udp.send('127.0.0.1', 5555, takeChar(2000, 'b'), console.log);
+  udp.send('127.0.0.1', 5555, takeChar(100, 'a'), function () {
+    console.log('sent', arguments);
+  });
+  udp.send('127.0.0.1', 5555, takeChar(2000, 'b'), function () {
+    console.log('sent', arguments);
+  });
+  udp.sendR('127.0.0.1', 5555, takeChar(200, 'c'), function () {
+    console.log('sent(R)', arguments);
+  });
 
 });
 
