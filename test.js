@@ -29,6 +29,8 @@ udp.bind('127.0.0.1', 5555, function (err) {
     })
   }, 6000);
 
+  var remote = udp.remote('127.0.0.1', 5555);
+
   udp.on('exit', function () {
     console.log(udp._remoteNamespace);
   });
@@ -37,17 +39,17 @@ udp.bind('127.0.0.1', 5555, function (err) {
     console.log('on data', addr, data.length, data.toString());
   });
 
-  udp.send('127.0.0.1', 5555, takeChar(100, 'a'), function () {
+  remote.send(takeChar(100, 'a'), function () {
     console.log('sent', arguments);
   });
-  udp.send('127.0.0.1', 5555, takeChar(2000, 'b'), function () {
+  remote.send(takeChar(2000, 'b'), function () {
     console.log('sent', arguments);
   });
 
-  udp.sendR('127.0.0.1', 5555, takeChar(200, 'c'), function () {
+  remote.sendR(takeChar(200, 'c'), function () {
     console.log('sent(R)', arguments);
   });
-  udp.sendR('127.0.0.1', 5555, takeChar(1000, 'd'), function () {
+  remote.sendR(takeChar(1000, 'd'), function () {
     console.log('sent(R)', arguments);
   });
 
