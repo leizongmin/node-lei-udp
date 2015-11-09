@@ -12,7 +12,7 @@ var utils = require('lei-utils');
 var socket = require('../');
 
 
-var basePort = 7890;
+var basePort = 7001;
 var unixDomainPath = path.resolve(os.tmpDir(), 'clouds-socket-' + Date.now() + '-');
 var isUseUnixDomain = (process.env.TEST_USE_UNIX_DOMAIN == 'true');
 
@@ -23,11 +23,19 @@ global.assert = assert;
 exports.utils = utils;
 
 exports.createSocket = function (options) {
-  return socket.create(options);
+  return socket.create(exports.mergeOptions(options));
 };
 
 exports.getListenAddress = function () {
   return {port: basePort++, host: '127.0.0.1'};
+};
+
+exports.mergeOptions = function (opts) {
+  return utils.merge({
+    responseTimeout: 80,
+    cacheTimeout: 1000,
+    cleanCacheInterval: 100
+  }, opts || {});
 };
 
 exports.exit = function () {
