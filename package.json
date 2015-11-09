@@ -23,5 +23,10 @@
   "dependencies": {
     "debug": "^2.2.0",
     "lei-proto": "0.0.3"
+  },
+  "devDependencies": {
+    "async": "^1.5.0",
+    "lei-utils": "^1.0.8",
+    "mocha": "^2.3.3"
   }
 }
