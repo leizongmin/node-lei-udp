@@ -23,7 +23,7 @@ function takeChar (n, c) {
   return s;
 }
 
-var callback = {a: 0, b: 0, c: 0, d: 0};
+var callback = {a: 0, b: 0, c: 0, d: 0, list: []};
 udp.bind('127.0.0.1', 5555, function (err) {
   if (err) throw err;
   console.log('listening');
@@ -44,6 +44,7 @@ udp.bind('127.0.0.1', 5555, function (err) {
   });
 
   udp.on('data', function (addr, data) {
+    callback.list.push([addr, data.length]);
     console.log('on data', addr, data.length, data.toString());
   });
 
