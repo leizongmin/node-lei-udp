@@ -1,13 +1,19 @@
 process.env.DEBUG = 'lei-udp:*';
 
+var util = require('util');
 var UDP = require('./');
 console.log(UDP);
 
 var udp = UDP.create({
   responseTimeout: 1000,
-  cacheTimeout: 5000
+  cacheTimeout: 5000,
+  pocketLossProb: 0.5
 });
 console.log(udp);
+
+function dump (obj) {
+  console.log(util.inspect(obj, {depth: 10}));
+}
 
 function takeChar (n, c) {
   var s = '';
@@ -17,6 +23,7 @@ function takeChar (n, c) {
   return s;
 }
 
+var callback = {a: 0, b: 0, c: 0, d: 0};
 udp.bind('127.0.0.1', 5555, function (err) {
   if (err) throw err;
   console.log('listening');
@@ -27,12 +34,13 @@ udp.bind('127.0.0.1', 5555, function (err) {
     udp.exit(function () {
       console.log('exited');
     })
-  }, 6000);
+  }, 10000);
 
   var remote = udp.remote('127.0.0.1', 5555);
 
   udp.on('exit', function () {
-    console.log(udp._remoteNamespace);
+    dump(udp._remoteNamespace);
+    dump(callback);
   });
 
   udp.on('data', function (addr, data) {
@@ -40,16 +48,20 @@ udp.bind('127.0.0.1', 5555, function (err) {
   });
 
   remote.send(takeChar(100, 'a'), function () {
+    callback.a++;
     console.log('sent', arguments);
   });
   remote.send(takeChar(2000, 'b'), function () {
+    callback.b++;
     console.log('sent', arguments);
   });
 
   remote.sendR(takeChar(200, 'c'), function () {
+    callback.c++;
     console.log('sent(R)', arguments);
   });
   remote.sendR(takeChar(1000, 'd'), function () {
+    callback.d++;
     console.log('sent(R)', arguments);
   });
 
