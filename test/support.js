@@ -33,8 +33,9 @@ exports.getListenAddress = function () {
 exports.mergeOptions = function (opts) {
   return utils.merge({
     responseTimeout: 80,
-    cacheTimeout: 1000,
-    cleanCacheInterval: 100
+    cacheTimeout: 5000,
+    cleanCacheInterval: 100,
+    maxRetry: 20
   }, opts || {});
 };
 
