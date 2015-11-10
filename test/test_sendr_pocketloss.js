@@ -8,7 +8,7 @@ var support = require('./support');
 
 var POCKET_LOSS_PROB = 0.4;
 
-describe('lei-udp', function () {
+describe('sendR() [pocketLossProb=0.4]', function () {
 
   it('send simple data', function (done) {
     var address = support.getListenAddress();

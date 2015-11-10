@@ -7,7 +7,7 @@
 var support = require('./support');
 
 
-describe('lei-udp', function () {
+describe('sendR()', function () {
 
   it('send simple data', function (done) {
     var address = support.getListenAddress();
