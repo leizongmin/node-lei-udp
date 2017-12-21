@@ -1,5 +1,7 @@
 ## 安装
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/leizongmin/node-lei-udp.svg)](https://greenkeeper.io/)
+
 ```bash
 $ npm install lei-udp --save
 ```
